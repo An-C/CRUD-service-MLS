@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.NoResultException;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -41,10 +42,11 @@ public class UserRestController {
 	/**
 	 * API documentation
 	 */
-	@PostMapping(value = "v1")
+	@GetMapping(value = "v1")
 	@SuppressWarnings("unchecked")
-	public String getInfo() throws IOException {
-		return "forward:/swagger/index.html";
+	public ResponseEntity getInfo(HttpServletResponse httpServletResponse) {
+		httpServletResponse.setHeader("Location", "/swagger/index.html");
+		return new ResponseEntity(HttpStatus.SEE_OTHER);
 	}
 
 	/**

@@ -62,8 +62,8 @@ paths:
         - name: id
           in: path
           description: >-
-            The id that needs to be fetched. Use
-            28492474-f594-4b08-84a0-bff40f9fd9cb for testing.
+            The id that needs to be fetched. If not generated yet, try to use
+            28492474-f594-4b08-84a0-bff40f9fd9cb for testing
           required: true
           type: string
       responses:
