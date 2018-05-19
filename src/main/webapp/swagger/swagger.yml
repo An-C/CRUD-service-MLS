@@ -137,7 +137,7 @@ definitions:
         example: bluerabbit
       pwd:
         type: string
-        description: Must be MD5 hashed
+        description: Must be MD5 hashed string of 32 characters
         example: 1fa6d11b07f329e44f989375f67ee5b4
       address:
         type: string
@@ -147,6 +147,7 @@ definitions:
         example: bluerabbit@oak.com
       phone:
         type: string
+        description: Must be of '+NNNNNNNNNNN' format where N is a number
         example: '+79998888888'
       hidden:
         type: boolean
@@ -159,6 +160,7 @@ definitions:
         type: string
       phone:
         type: string
+        description: Must be of '+NNNNNNNNNNN' format where N is a number
     xml:
       name: FieldsExample
 
