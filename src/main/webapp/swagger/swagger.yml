@@ -1,0 +1,164 @@
+swagger: '2.0'
+info:
+  description: 'This is a sample REST microservice with /CRUD operations on User entity. '
+  version: 1.0.0
+  title: User CRUD Operations
+  contact:
+    email: an.chizhikova@hotmail.com
+host: 'localhost:9302'
+basePath: /v1
+tags:
+  - name: users
+    description: Operations on user
+schemes:
+  - http
+paths:
+  /users:
+    post:
+      tags:
+        - users
+      summary: Create user
+      description: ''
+      operationId: createUser
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          description: Created User object
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/User'
+    get:
+      tags:
+        - users
+      summary: Get all available users list
+      description: ''
+      operationId: getUsers
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          description: No data found
+  '/users/{id}':
+    get:
+      tags:
+        - users
+      summary: Get user by user identifier
+      description: Get user data by identifier
+      operationId: getUserById
+      produces:
+        - application/json;charset-UTF8
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            The id that needs to be fetched. Use
+            28492474-f594-4b08-84a0-bff40f9fd9cb for testing.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: Invalid identifier supplied
+        '404':
+          description: User not found
+    put:
+      tags:
+        - users
+      summary: Update user
+      description: 'Someday this action will be available to perform only to authorized users with appropriate permissions'
+      operationId: updateUser
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: identifier of user that needs to be updated
+          required: true
+          type: string
+        - in: body
+          name: fields
+          description: Fields to be updated with values in json format
+          required: true
+          schema:
+            $ref: '#/definitions/FieldsExample'
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: Invalid identifier supplied
+        '404':
+          description: User not found
+    delete:
+      tags:
+        - users
+      summary: Delete (actually disable) user  by identifier
+      description: 'Someday this action will be available to perform only to authorized users with appropriate permissions'
+      operationId: deleteUser
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: The identifier of user that needs to be deleted
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid identifier supplied
+        '404':
+          description: User not found
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 88492474-f594-4b08-84a0-bff40f9fd9cb
+      userName:
+        type: string
+        example: bluerabbit
+      pwd:
+        type: string
+        description: Must be MD5 hashed
+        example: 1fa6d11b07f329e44f989375f67ee5b4
+      address:
+        type: string
+        example: forest hole
+      email:
+        type: string
+        example: bluerabbit@oak.com
+      phone:
+        type: string
+        example: '+79998888888'
+      hidden:
+        type: boolean
+    xml:
+      name: User
+  FieldsExample:
+    type: object
+    properties:
+      address:
+        type: string
+      phone:
+        type: string
+    xml:
+      name: FieldsExample
+

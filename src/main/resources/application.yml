@@ -1,0 +1,42 @@
+
+spring:
+  application:
+    name: user-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/marketlogic
+    username: postgres
+    password: postgres1
+    driver-class-name: org.postgresql.Driver
+
+  jackson:
+    deserialization: 
+      ACCEPT_SINGLE_VALUE_AS_ARRAY: true
+
+  jpa:
+    properties:
+      database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+
+  mandatory-file-encoding: UTF-8
+
+
+server:
+  port: 9302
+
+security:
+  ignored: /**
+
+logging:
+  level:
+    com.netflix: WARN
+    org.apache: WARN
+    org.hibernate: WARN
+    org.springframework: WARN
+    com.mls.users: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file: c:\logs\${spring.application.name}.log
+
+
+
