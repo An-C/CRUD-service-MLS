@@ -38,6 +38,16 @@ import java.util.*;
 
 public class SuggestionBuilder {
 
+
+//	public static void main(String[] args) {
+//		ArrayList<String> tokens = new ArrayList<>();
+//		tokens.addAll(Arrays.asList(TOKENS));
+//		Set<String> stops = new HashSet<>();
+//		stops.addAll(Arrays.asList(STOP_WORDS));
+//		Set<Suggestion> set = buildSuggestionsFromTokenFromString(tokens.iterator(), stops);
+//		set.forEach(n -> System.out.println(n.text));
+//	}
+
 	/**
 	 * Class implements Comparable interface to be used inside a TreeSet
 	 */
@@ -80,16 +90,12 @@ public class SuggestionBuilder {
 
 		TreeSet<Suggestion> suggestionSet = new TreeSet<>();
 		StringBuilder sb = new StringBuilder();
-		int combinedTokensCount = 0;
 
-		while (tokens.hasNext()){
-			String token = tokens.next();
-
-			if (!isStopping(token, stopWords) && combinedTokensCount<MAX_COMBINED_TOKENS){
+		tokens.forEachRemaining( n -> {
+			if (!isStopping(n, stopWords) && sb.toString().split(" ").length<MAX_COMBINED_TOKENS){
 				if (sb.length()>0)
 					sb.append(" ");
-				sb.append(token);
-				combinedTokensCount++;
+				sb.append(n);
 				suggestionSet.add(new Suggestion(sb.toString()));
 			}
 			else {
@@ -98,9 +104,8 @@ public class SuggestionBuilder {
 					if (sb.length()>0)
 						suggestionSet.add(new Suggestion(sb.toString()));
 				}
-				combinedTokensCount = 0;
 			}
-		}
+		});
 
 		return suggestionSet;
 	}
