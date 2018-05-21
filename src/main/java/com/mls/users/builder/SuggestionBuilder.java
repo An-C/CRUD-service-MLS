@@ -88,6 +88,9 @@ public class SuggestionBuilder {
 	 */
 	private static Set<Suggestion> buildSuggestionsFromTokenFromString(Iterator<String> tokens, Set<String> stopWords) {
 
+		if (tokens == null)
+			throw new IllegalArgumentException("Invalid iterator");
+
 		TreeSet<Suggestion> suggestionSet = new TreeSet<>();
 		StringBuilder sb = new StringBuilder();
 
@@ -118,9 +121,11 @@ public class SuggestionBuilder {
 	 * @return true if token is stopping or false otherwise
 	 */
 	private static boolean isStopping(String token, Set<String> stopWords){
-		for (String stopWord: stopWords){
-			if (stopWord.equalsIgnoreCase(token))
-				return true;
+		if (stopWords != null) {
+			for (String stopWord: stopWords){
+				if (stopWord.equalsIgnoreCase(token))
+					return true;
+			}
 		}
 		return token.length()==1;
 	}
